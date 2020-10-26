@@ -1,0 +1,15 @@
+{
+    "name": "extreme-bg/borica-emv-3ds",
+    "description": "Client library for Borica EMV 3DS",
+    "type": "library",
+    "homepage": "https://1337.bg",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bogdan Kovachev",
+            "email": "extreme@1337.bg",
+            "homepage": "https://1337.bg",
+            "role": "Developer"
+        }
+    ]
+}
