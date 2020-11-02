@@ -159,6 +159,43 @@ class Response {
     ];
 
     /**
+     * Response codes
+     */
+    const RESPONSE_CODES = [
+        '00' => 'Successfully completed',
+        '01' => 'Refer to card issuer',
+        '04' => 'PICK UP',
+        '05' => 'Do not Honour',
+        '06' => 'Error',
+        '12' => 'Invalid transaction',
+        '13' => 'Invalid amount',
+        '14' => 'No such card',
+        '15' => 'No such issuer',
+        '17' => 'Customer cancellation 30 Format error',
+        '35' => 'Pick-up, card acceptor contact acquirer',
+        '36' => 'Pick up, card restricted',
+        '37' => 'Pick up, call acquirer security',
+        '38' => 'Pick up, Allowable PIN tries exceeded',
+        '39' => 'No credit account',
+        '40' => 'Requested function not supported',
+        '41' => 'Pick up, lost card',
+        '42' => 'No universal account',
+        '43' => 'Pick up, stolen card',
+        '54' => 'Expired card / target',
+        '55' => 'Incorrect PIN',
+        '56' => 'No card record',
+        '57' => 'Transaction not permitted to cardholder',
+        '58' => 'Transaction not permitted to terminal',
+        '59' => 'Suspected fraud',
+        '85' => 'No reason to decline',
+        '88' => 'Cryptographic failure',
+        '89' => 'Authentication failure',
+        '91' => 'Issuer or switch is inoperative',
+        '95' => 'Reconcile error / Auth Not found',
+        '96' => 'System Malfunction'
+    ];
+
+    /**
      * Response error codes
      */
     const RESPONSE_ERROR_CODES = [
