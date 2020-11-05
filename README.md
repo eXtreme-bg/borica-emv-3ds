@@ -10,12 +10,16 @@ Borica EMV 3DS is PHP library providing an easier way to integrate newly release
 
 ### 1.1. Using Composer
 
+Installation is recommended to be done via composer by running:
+
 ```
-{
-    "require": {
-        "extreme-bg/borica-emv-3ds": "^0.2"
-    }
-}
+composer require extreme-bg/borica-emv-3ds "^0.3"
+```
+
+Alternatively you can add the following to the `require` section in your `composer.json` manually:
+
+```
+"extreme-bg/borica-emv-3ds": "^0.3"
 ```
 
 ## 2. Usage
