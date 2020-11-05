@@ -161,7 +161,7 @@ class Request {
      *
      * @var string
      */
-    public $desc; // TODO: Rename it to `description`
+    public $description;
 
     /**
      * Описание: URL на търговеца
@@ -170,12 +170,12 @@ class Request {
      *
      * @var string
      */
-    public $merchUrl; // TODO: Rename to `merchantUrl`
+    public $merchantUrl;
 
     /**
-     * TODO: Review when new official documentation
-     *
      * Описание: Име на търговеца.
+     * Размер: 1-80
+     * Съдържание: Използва са за предоставяне на информация на платежната страница от страна на търговеца за картодържателя. Възможно е използване на кирилица.
      *
      * @var string
      */
@@ -223,7 +223,7 @@ class Request {
      *
      * @var string
      */
-    public $merchGmt = '+03'; // TODO: Rename to `merchantTimezone`
+    public $merchantTimezone = '+03';
 
     /**
      * Описание: Тип на оригиналната транзакция
@@ -306,9 +306,9 @@ class Request {
      */
     public $backref; // TODO: Rename
 
-    // TODO: Add `RRN` when adde in new official documentation
+    // TODO: Add `RRN` when it's included in new official documentation
 
-    // TODO: Add `INT_REF` when added in new official documentation
+    // TODO: Add `INT_REF` when it's included in new official documentation
 
     /**
      * @param integer $transactionType
@@ -355,7 +355,7 @@ class Request {
      * @return Request
      */
     public function setDescription(string $description) : Request {
-        $this->desc = $description;
+        $this->description = $description;
 
         return $this;
     }
@@ -375,7 +375,7 @@ class Request {
      * @return Request
      */
     public function setMerchantUrl(string $merchantUrl) : Request {
-        $this->merchUrl = $merchantUrl;
+        $this->merchantUrl = $merchantUrl;
 
         return $this;
     }
@@ -425,7 +425,7 @@ class Request {
      * @return Request
      */
     public function setMerchantTimezone(string $merchantTimezone) : Request {
-        $this->merchGmt = $merchantTimezone;
+        $this->merchantTimezone = $merchantTimezone;
 
         return $this;
     }
