@@ -52,7 +52,8 @@ class Request {
         TransactionType::STATUS_CHECK => [
             'TERMINAL',
             'TRTYPE',
-            'ORDER'
+            'ORDER',
+            'NONCE'
         ]
     ];
 
