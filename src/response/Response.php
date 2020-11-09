@@ -296,7 +296,7 @@ class Response {
      *
      * @var string
      */
-    public $rrn; // TODO: Rename to `retrievalReferenceNumber`
+    public $retrievalReferenceNumber;
 
     /**
      * Описание: Вътрешна референция
@@ -357,7 +357,7 @@ class Response {
      * Размер: 1
      * Съдържание: Статус на автентикация, използван в схемата 3-D Secure
      *
-     * @var string // TODO: Change type?
+     * @var string
      */
     public $paresStatus;
 
@@ -367,7 +367,7 @@ class Response {
      *
      * @var string
      */
-    public $eci; // TODO: Rename to eCommerceIdentifier
+    public $electronicCommerceIndicator;
 
     /**
      * Размер: 32
@@ -415,14 +415,14 @@ class Response {
             $instance->action = intval($postData['ACTION']);
             $instance->responseCode = $postData['RC'];
             $instance->approval = $postData['APPROVAL'];
-            $instance->rrn = $postData['RRN'];
+            $instance->retrievalReferenceNumber = $postData['RRN'];
             $instance->internalReference = $postData['INT_REF'];
             $instance->statusMessage = $postData['STATUSMSG'];
             $instance->cardNumber = $postData['CARD'];
             $instance->originalTransactionDate = $postData['TRAN_DATE'];
             $instance->timestamp = $postData['TIMESTAMP'];
             $instance->paresStatus = $postData['PARES_STATUS'];
-            $instance->eci = $postData['ECI'];
+            $instance->electronicCommerceIndicator = $postData['ECI'];
             $instance->nonce = $postData['NONCE'];
             $instance->pSign = $postData['P_SIGN'];
             // TODO: Review `TRAN_TRTYPE` and `LANG` when new official documentation.
