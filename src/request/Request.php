@@ -146,7 +146,7 @@ class Request {
     public $currency = 'BGN';
 
     /**
-     * Описание: Поръчка
+     * Описание: Номер на поръчка
      * Размер: 6
      * Съдържание: Номер на поръчката за търговеца, 6 цифри, който трябва да бъде уникален за терминала в рамките на деня (напр. „000123“)
      *
@@ -245,19 +245,38 @@ class Request {
 
     /**
      * Размер: 32
-     * Съдържание: Съдържа 16 непредсказуеми случайни байтове, представенив шестнадесетичен формат. Може да съдържа главни латински букви A..Z и цифри 0..9.
+     * Съдържание: Съдържа 16 непредсказуеми случайни байтове, представенив шестнадесетичен формат. Може да съдържа главни латински букви A..Z и цифри 0..9. Трябва да бъде уникален за терминала в рамките на последните 24 часа.
      *
      * @var string
      */
     public $nonce;
 
     /**
+     * Описание: Подпис
      * Размер: 512
      * Съдържание: Код за автентициране на съобщението от APGW. Съдържа 256 байта в шестнадесетичен формат. Може да съдържа главни латински букви A..Z и цифри 0..9.
      *
      * @var string
      */
     public $pSign;
+
+    /**
+     * Описание: Референция на транзакцията
+     * Размер: 12
+     * Съдържание: Референция на трансакцията (ISO-8583 -1987, поле 37).
+     *
+     * @var string
+     */
+    public $retrievalReferenceNumber;
+
+    /**
+     * Описание: Вътрешна референция
+     * Размер: 16
+     * Съдържание: Вътрешна референция за е-Commerce gateway
+     *
+     * @var string
+     */
+    public $internalReference;
 
     /**
      * Размер: 0-35000
@@ -297,7 +316,7 @@ class Request {
     public $addendum = 'AD,TD';
 
     /**
-     * TODO: Review when new official documentation. The field is not included in EMV 3DS v2.2.
+     * TODO: Review when new official documentation. The field is not included in EMV 3DS v2.3.
      *
      * Размер: 1-250
      * Съдържание: URL на търговеца за изпращане на резултата от авторизацията.
@@ -305,10 +324,6 @@ class Request {
      * @var string
      */
     public $backref; // TODO: Rename
-
-    // TODO: Add `RRN` when it's included in new official documentation
-
-    // TODO: Add `INT_REF` when it's included in new official documentation
 
     /**
      * @param integer $transactionType
@@ -466,6 +481,26 @@ class Request {
      */
     public function setPSign(string $pSign) : Request {
         $this->pSign = $pSign;
+
+        return $this;
+    }
+
+    /**
+     * @param string $retrievalReferenceNumber
+     * @return Request
+     */
+    public function setRetrievalReferenceNumber(string $retrievalReferenceNumber) : Request {
+        $this->retrievalReferenceNumber = $retrievalReferenceNumber;
+
+        return $this;
+    }
+
+    /**
+     * @param string $internalReference
+     * @return Request
+     */
+    public function setInternalReference(string $internalReference) : Request {
+        $this->internalReference = $internalReference;
 
         return $this;
     }

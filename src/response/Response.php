@@ -283,7 +283,7 @@ class Response {
     /**
      * Описание: Одобрение
      * Размер: 6
-     * Съдържание: Код за одобрение (ISO- 8583, поле 38). Може да бъде празно, ако не е подадено от картовата система.
+     * Съдържание: Код за одобрение (ISO- 8583, поле 38). Може да бъде празно, ако не е подадено от издателя на картата.
      *
      * @var string
      */
@@ -296,11 +296,11 @@ class Response {
      *
      * @var string
      */
-    public $rrn;
+    public $rrn; // TODO: Rename to `retrievalReferenceNumber`
 
     /**
      * Описание: Вътрешна референция
-     * Размер: 1-32
+     * Размер: 16
      * Съдържание: Вътрешна референция за е-Commerce gateway
      *
      * @var string
@@ -317,9 +317,9 @@ class Response {
     public $originalTranscationType;
 
     /**
-     * Описание: Допълнителен код на завършване
+     * Описание: Текстово описание на код на завършване
      * Размер: 1-255
-     * Съдържание: Допълнителен код за грешка при автентикация в отговор на „Проверка на статус“
+     * Съдържание: Текстово описание на код на завършване
      *
      * @var string
      */
@@ -337,7 +337,7 @@ class Response {
     /**
      * Описание: Дата/час
      * Размер: 19
-     * Съдържание: Дата/час на оригиналната трансакция в отговор на „Проверка на статус“
+     * Съдържание: Дата/час на оригиналната трансакция: YYYYMMDDHHMMSS
      *
      * @var string
      */
@@ -367,7 +367,7 @@ class Response {
      *
      * @var string
      */
-    public $eci;
+    public $eci; // TODO: Rename to eCommerceIdentifier
 
     /**
      * Размер: 32
@@ -379,19 +379,12 @@ class Response {
 
     /**
      * Описание:: Подпис
-     * Размер: 1-256
+     * Размер: 512
      * Съдържание: Код за автентициране на съобщението от APGW. Съдържа 256 байтав шестнадесетичен формат. Може да съдържа главни латински букви A..Z и цифри 0..9.
      *
      * @var string
      */
     public $pSign;
-
-    /**
-     * TODO: Review when new official documentation
-     *
-     * @var string // TODO: Change type?
-     */
-    public $merchantTokenId;
 
     /**
      * @var array
@@ -415,6 +408,7 @@ class Response {
 
         if ($instance->transactionType == TransactionType::SALE) {
             $instance->terminal = $postData['TERMINAL'];
+            $instance->transactionType = $postData['TRTYPE'];
             $instance->order = $postData['ORDER'];
             $instance->amount = floatval($postData['AMOUNT']);
             $instance->currency = $postData['CURRENCY'];
@@ -423,13 +417,15 @@ class Response {
             $instance->approval = $postData['APPROVAL'];
             $instance->rrn = $postData['RRN'];
             $instance->internalReference = $postData['INT_REF'];
+            $instance->statusMessage = $postData['STATUSMSG'];
+            $instance->cardNumber = $postData['CARD'];
+            $instance->originalTransactionDate = $postData['TRAN_DATE'];
             $instance->timestamp = $postData['TIMESTAMP'];
-            $instance->nonce = $postData['NONCE'];
-            $instance->pSign = $postData['P_SIGN']; // TODO: Review when new official documentation. It's returned but it's not in documentation.
-            $instance->transactionType = $postData['TRTYPE'];
             $instance->paresStatus = $postData['PARES_STATUS'];
             $instance->eci = $postData['ECI'];
-            $instance->merchantTokenId = $postData['MERCH_TOKEN_ID']; // TODO: Review when new official documentation. It's returned but it's not in documentation.
+            $instance->nonce = $postData['NONCE'];
+            $instance->pSign = $postData['P_SIGN'];
+            // TODO: Review `TRAN_TRTYPE` and `LANG` when new official documentation.
         } elseif ($instance->transactionType == TransactionType::DEFERRED_AUTHORIZATION) {
 
         } elseif ($instance->transactionType == TransactionType::COMPLETE_DEFERRED_AUTHORIZATION) {
