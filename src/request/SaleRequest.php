@@ -46,8 +46,7 @@ class SaleRequest extends Request {
             'MERCH_GMT' => $this->merchantTimezone,
             'NONCE' => $this->nonce,
             'P_SIGN' => $this->pSign,
-            'BACKREF' => $this->backref, // TODO: Review when new official documentation. Not included in EMV 3DS v2.2 but required.
-            // 'M_INFO' => $this->mInfo
+            'BACKREF' => $this->backref // TODO: Review when new official documentation. Not included in EMV 3DS v2.3 but required.
         ];
 
         if ($this->email) {
