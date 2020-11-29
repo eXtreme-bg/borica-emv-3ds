@@ -34,23 +34,45 @@ class SaleRequest extends Request {
         $postData = [
             'AMOUNT' => $this->getAmount(),
             'CURRENCY' => $this->currency,
-            'DESC' => $this->description,
             'TERMINAL' => $this->terminal,
-            'MERCH_NAME' => $this->merchantName,
-            'MERCH_URL' => $this->merchantUrl,
             'MERCHANT' => $this->merchant,
             'TRTYPE' => $this->transactionType,
             'ORDER' => $this->getOrder(),
-            'COUNTRY' => $this->country,
             'TIMESTAMP' => $this->timestamp,
-            'MERCH_GMT' => $this->merchantTimezone,
             'NONCE' => $this->nonce,
-            'P_SIGN' => $this->pSign,
-            'BACKREF' => $this->backref // TODO: Review when new official documentation. Not included in EMV 3DS v2.3 but required.
+            'P_SIGN' => $this->pSign
         ];
+
+        if ($this->description) {
+            $postData['DESC'] = $this->description;
+        }
+
+        if ($this->merchantName) {
+            $postData['MERCH_NAME'] = $this->merchantName;
+        }
+
+        if ($this->merchantUrl) {
+            $postData['MERCH_URL'] = $this->merchantUrl;
+        }
 
         if ($this->email) {
             $postData['EMAIL'] = $this->email;
+        }
+
+        if ($this->country) {
+            $postData['COUNTRY'] = $this->country;
+        }
+
+        if ($this->merchantTimezone) {
+            $postData['MERCH_GMT'] = $this->merchantTimezone;
+        }
+
+        if ($this->language) {
+            $postData['LANG'] = $this->language;
+        }
+
+        if ($this->backref) {
+            $postData['BACKREF'] = $this->backref;
         }
 
         if ($this->adCustBorOrderId) {
