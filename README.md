@@ -14,13 +14,13 @@ Borica EMV 3DS is PHP library providing an easier way to integrate newly release
 
 Installation is recommended to be done via composer by running:
 
-```
+```shell
 composer require extreme-bg/borica-emv-3ds "0.*"
 ```
 
 Alternatively you can add the following to the `require` section in your `composer.json` manually:
 
-```
+```json
 "extreme-bg/borica-emv-3ds": "0.*"
 ```
 
@@ -30,7 +30,7 @@ Alternatively you can add the following to the `require` section in your `compos
 
 Create and configure `Borica` using your private key and certificate. The private key needs to be generated  by yourself (see `Cryptography` section for more details). The certificate (public key) is provided by Borica.
 
-```
+```php
 $borica = new Borica();
 $borica->setPrivateKey('/var/www/certificates/borica.pem') // Absolute file path
     ->setPrivateKeyPassword('<Private Key Password>')
@@ -44,7 +44,7 @@ To make a sale request (most commonly used one in e-commerce), create and config
 
 **Don't forget to use sanitized data instead of raw $_POST data.**
 
-```
+```php
 $request = new SaleRequest();
 $request->setTransactionType(TransactionType::SALE)
     ->setAmount(100.0)
@@ -68,7 +68,7 @@ $request->setTransactionType(TransactionType::SALE)
 
 Optionally you can validate that all the properties are correct with:
 
-```
+```php
 if (!$request->validate()) {
     // List all errors
     var_dump($request->getErrors());
@@ -77,7 +77,7 @@ if (!$request->validate()) {
 
 After you create the request, you need to generate an HTML form and redirect user to Borica payment page. See example implementation below:
 
-```
+```html
 <div>
     <p>
         Ще бъдете прехвърлени към страницата за онлайн плащания на БОРИКА през защитена (SSL) връзка.
@@ -105,7 +105,7 @@ After you create the request, you need to generate an HTML form and redirect use
 
 After a user pays on the Borica payment page, they will be redirected to the `backUrl` specified in the request. Note that this is not guaranteed, because the user can close their browser or disable JavaScript used for redirecting. In this case see `2.4. Create Status Check Request`.
 
-```
+```php
 $borica = new Borica();
 $borica->setPrivateKey('/var/www/certificates/borica.pem') // Absolute file path
     ->setPrivateKeyPassword('<Private Key Password>')
@@ -127,7 +127,7 @@ if ($response->isSuccessful()) {
 
 If you want to check the status of an already sent request, create and configure `StatusCheckRequest`. `<ТИД>` is obtained from Borica.
 
-```
+```php
 $request = new StatusCheckRequest();
 $request->setTransactionType(TransactionType::STATUS_CHECK)
     ->setTerminal('<ТИД>')
@@ -141,13 +141,13 @@ $request->setTransactionType(TransactionType::STATUS_CHECK)
 
 - Generate a private key with secure password:
 
-```
+```shell
 $ openssl genrsa -out borica.key -aes256 2048
 ```
 
 - Generate a code signing request (CSR) using your company information:
 
-```
+```shell
 $ openssl req -new -key borica.key -out borica.csr
 
 	Country Name (2 letter code) []:BG
