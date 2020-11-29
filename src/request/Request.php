@@ -125,7 +125,7 @@ class Request {
      *
      * @var integer
      */
-    public $transactionType;
+    protected $transactionType;
 
     /**
      * Описание: Сума
@@ -134,7 +134,7 @@ class Request {
      *
      * @var float
      */
-    public $amount;
+    protected $amount;
 
     /**
      * Описание: Валута
@@ -143,7 +143,7 @@ class Request {
      *
      * @var string
      */
-    public $currency = 'BGN';
+    protected $currency = 'BGN';
 
     /**
      * Описание: Номер на поръчка
@@ -152,7 +152,7 @@ class Request {
      *
      * @var integer
      */
-    public $order;
+    protected $order;
 
     /**
      * Описание: Описание
@@ -161,7 +161,7 @@ class Request {
      *
      * @var string
      */
-    public $description;
+    protected $description;
 
     /**
      * Описание: URL на търговеца
@@ -170,7 +170,7 @@ class Request {
      *
      * @var string
      */
-    public $merchantUrl;
+    protected $merchantUrl;
 
     /**
      * Описание: Име на търговеца.
@@ -179,7 +179,7 @@ class Request {
      *
      * @var string
      */
-    public $merchantName;
+    protected $merchantName;
 
     /**
      * Описание: Идентификатор на търговеца
@@ -188,7 +188,7 @@ class Request {
      *
      * @var string
      */
-    public $merchant;
+    protected $merchant;
 
     /**
      * Описание: Идентификатор на терминала
@@ -197,7 +197,7 @@ class Request {
      *
      * @var string
      */
-    public $terminal;
+    protected $terminal;
 
     /**
      * Размер: 80
@@ -205,7 +205,7 @@ class Request {
      *
      * @var string
      */
-    public $email;
+    protected $email;
 
     /**
      * Описание: Държава
@@ -214,7 +214,7 @@ class Request {
      *
      * @var string
      */
-    public $country = 'BG';
+    protected $country = 'BG';
 
     /**
      * Описание: Часова зона на търговеца
@@ -223,7 +223,7 @@ class Request {
      *
      * @var string
      */
-    public $merchantTimezone = '+03';
+    protected $merchantTimezone = '+03';
 
     /**
      * Описание: Тип на оригиналната транзакция
@@ -232,7 +232,7 @@ class Request {
      *
     * @var string
     */
-    public $originalTransactionType;
+    protected $originalTransactionType;
 
     /**
      * Описание: Дата/час
@@ -241,7 +241,7 @@ class Request {
      *
      * @var string
      */
-    public $timestamp;
+    protected $timestamp;
 
     /**
      * Размер: 32
@@ -249,7 +249,7 @@ class Request {
      *
      * @var string
      */
-    public $nonce;
+    protected $nonce;
 
     /**
      * Описание: Подпис
@@ -258,7 +258,7 @@ class Request {
      *
      * @var string
      */
-    public $pSign;
+    protected $pSign;
 
     /**
      * Описание: Референция на транзакцията
@@ -267,7 +267,7 @@ class Request {
      *
      * @var string
      */
-    public $retrievalReferenceNumber;
+    protected $retrievalReferenceNumber;
 
     /**
      * Описание: Вътрешна референция
@@ -276,7 +276,7 @@ class Request {
      *
      * @var string
      */
-    public $internalReference;
+    protected $internalReference;
 
     /**
      * Размер: 0-35000
@@ -284,7 +284,7 @@ class Request {
      *
      * @var string
      */
-    public $mInfo;
+    protected $mInfo;
 
     /**
      * Описание: Език
@@ -293,7 +293,7 @@ class Request {
      *
      * @var string
      */
-    public $language = 'BG';
+    protected $language = 'BG';
 
     /**
      * Описание: Идентификатор на поръчката
@@ -304,7 +304,7 @@ class Request {
      *
      * @var string
      */
-    public $adCustBorOrderId; // TODO: Rename
+    protected $adCustBorOrderId; // TODO: Rename
 
     /**
      * Описание: Допълнение
@@ -313,7 +313,7 @@ class Request {
      *
      * @var string
      */
-    public $addendum = 'AD,TD';
+    protected $addendum = 'AD,TD';
 
     /**
      * TODO: Review when new official documentation. The field is not included in EMV 3DS v2.3.
@@ -323,7 +323,7 @@ class Request {
      *
      * @var string
      */
-    public $backref; // TODO: Rename
+    protected $backref; // TODO: Rename
 
     /**
      * @param integer $transactionType
