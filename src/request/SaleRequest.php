@@ -26,6 +26,34 @@ class SaleRequest extends Request {
     }
 
     /**
+     * @return boolean
+     */
+    public function validate() : bool {
+        $this->clearErrors();
+
+        // Validate all mandatory properties
+        foreach ([
+            'amount',
+            'currency',
+            'terminal',
+            'merchant',
+            'transactionType',
+            'order',
+            'timestamp',
+            'nonce',
+            'pSign'
+        ] as $property) {
+            if ($this->$property === null || mb_strlen($this->$property) === 0) {
+                $this->errors[$property][] = $property . ' is required.';
+            }
+        }
+
+        // TODO: Add additional validators
+
+        return !$this->hasErrors();
+    }
+
+    /**
      * Generate POST data array
      *
      * @return array

@@ -326,6 +326,13 @@ class Request {
     protected $backref; // TODO: Rename
 
     /**
+     * Validation errors in format: `property` => [`error`, ...]
+     *
+     * @var array
+     */
+    protected $errors = [];
+
+    /**
      * @param integer $transactionType
      * @return Request
      */
@@ -594,6 +601,27 @@ class Request {
      */
     private static function encode(string $text) : string {
         return htmlspecialchars($text, ENT_QUOTES);
+    }
+
+    /**
+     * @return boolean
+     */
+    public function hasErrors() : bool {
+        return $this->errors !== [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getErrors() : array {
+        return $this->errors;
+    }
+
+    /**
+     * @return void
+     */
+    public function clearErrors() : void {
+        $this->errors = [];
     }
 
 }
