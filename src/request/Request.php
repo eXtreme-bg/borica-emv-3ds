@@ -578,12 +578,22 @@ class Request {
         $html = '<form action="' . $borica->getApiUrl() . '" method="POST" id="boricaForm">';
 
         foreach ($this->toPostData() as $key => $value) {
-            $html .= '<input name="' . $key . '" value="' . $value . '" style="width: 100%;"><br>';
+            $html .= '<input name="' . self::encode($key) . '" value="' . self::encode($value) . '" style="width: 100%;"><br>';
         }
 
         $html .= '<button type="submut">Send to Borica</button></form>';
 
         return $html;
+    }
+
+    /**
+     * Encodes special characters into HTML entities
+     *
+     * @param string $text
+     * @return string
+     */
+    private static function encode(string $text) : string {
+        return htmlspecialchars($text, ENT_QUOTES);
     }
 
 }

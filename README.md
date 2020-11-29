@@ -6,6 +6,8 @@ Borica EMV 3DS is PHP library providing an easier way to integrate newly release
 
 *TBD*
 
+* Properly configured `default_charset` php.ini directive
+
 ## 1. Installation
 
 ### 1.1. Using Composer
@@ -39,6 +41,8 @@ $borica->setPrivateKey('/var/www/certificates/borica.pem') // Absolute file path
 ### 2.2. Create and send Sale Request `(TRTYPE=1)`
 
 To make a sale request (most commonly used one in e-commerce), create and configure `SaleRequest`. Both `<МИД>` and `<ТИД>` are obtained from Borica. For all properties check the library source code.
+
+**Don't forget to use sanitized data instead of raw $_POST data.**
 
 ```
 $request = new SaleRequest();
