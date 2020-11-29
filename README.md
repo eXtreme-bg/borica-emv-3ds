@@ -66,6 +66,15 @@ $request->setTransactionType(TransactionType::SALE)
     ->sign($borica);
 ```
 
+Optionally you can validate that all the properties are correct with:
+
+```
+if (!$request->validate()) {
+    // List all errors
+    var_dump($request->getErrors());
+}
+```
+
 After you create the request, you need to generate an HTML form and redirect user to Borica payment page. See example implementation below:
 
 ```
