@@ -588,7 +588,7 @@ class Request {
             $html .= '<input name="' . self::encode($key) . '" value="' . self::encode($value) . '" style="width: 100%;"><br>';
         }
 
-        $html .= '<button type="submut">Send to Borica</button></form>';
+        $html .= '<button type="submit">Send to Borica</button></form>';
 
         return $html;
     }
