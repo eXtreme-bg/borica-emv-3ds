@@ -99,10 +99,6 @@ class SaleRequest extends Request {
             $postData['LANG'] = $this->language;
         }
 
-        if ($this->backref) {
-            $postData['BACKREF'] = $this->backref;
-        }
-
         if ($this->adCustBorOrderId) {
             $postData['AD.CUST_BOR_ORDER_ID'] = $this->adCustBorOrderId;
             $postData['ADDENDUM'] = $this->addendum;

@@ -316,16 +316,6 @@ class Request {
     protected $addendum = 'AD,TD';
 
     /**
-     * TODO: Review when new official documentation. The field is not included in EMV 3DS v2.3.
-     *
-     * Размер: 1-250
-     * Съдържание: URL на търговеца за изпращане на резултата от авторизацията.
-     *
-     * @var string
-     */
-    protected $backref; // TODO: Rename
-
-    /**
      * Validation errors in format: `property` => [`error`, ...]
      *
      * @var array
@@ -468,16 +458,6 @@ class Request {
      */
     public function setNonce(string $nonce) : Request {
         $this->nonce = $nonce;
-
-        return $this;
-    }
-
-    /**
-     * @param string $url
-     * @return Request
-     */
-    public function setBackRef(string $url) : Request {
-        $this->backref = $url;
 
         return $this;
     }
