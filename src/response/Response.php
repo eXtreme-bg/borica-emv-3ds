@@ -542,4 +542,18 @@ class Response {
         return $this;
     }
 
+    /**
+     * Response code in human-readable format
+     *
+     * @param string $lang Language ("bg" or "en")
+     * @return string
+     */
+    public function responseCodeDescription($lang = 'bg') : string {
+        if (isset($this->responseCode) && array_key_exists($this->responseCode, $this::RESPONSE_CODES[$lang])) {
+            return $this::RESPONSE_CODES[$lang][$this->responseCode];
+        }
+
+        return '';
+    }
+
 }
