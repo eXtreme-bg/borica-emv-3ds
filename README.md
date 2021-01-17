@@ -60,7 +60,6 @@ $request->setTransactionType(TransactionType::SALE)
     ->setMerchantTimezone('+02')
     ->setTimestamp(time())
     ->setNonce(strtoupper(bin2hex(openssl_random_pseudo_bytes(16))))
-    ->setBackRef('https://1337.bg/borica/response') // Absolute URL
     ->setOrderIdentifier($request->getOrder() . ' Website')
     ->setAddendum('AD,TD')
     ->sign($borica);
@@ -103,7 +102,7 @@ After you create the request, you need to generate an HTML form and redirect use
 
 ### 2.3. Handle response
 
-After a user pays on the Borica payment page, they will be redirected to the `backUrl` specified in the request. Note that this is not guaranteed, because the user can close their browser or disable JavaScript used for redirecting. In this case see `2.4. Create Status Check Request`.
+After a user pays on the Borica payment page, they will be redirected to the `backUrl` defined for the terminal in APGW database (**check with the bank that this URL is correctly set for the terminal**). Note that this is not guaranteed, because the user can close their browser or disable JavaScript used for redirecting. In this case see `2.4. Create Status Check Request`.
 
 ```php
 $borica = new Borica();
