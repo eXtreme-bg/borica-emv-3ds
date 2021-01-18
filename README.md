@@ -118,7 +118,12 @@ if (!$response->signatureIsVerified) {
 }
 
 if ($response->isSuccessful()) {
+    echo '<h1>Плащането е успешно</h1>';
+
     ...
+} else {
+    echo '<h1>Възникна грешка при плащане</h1>';
+    echo '<p>Отговор на сървъра: ' . $response->responseCode . ' - ' . $response->responseCodeDescription() . '</p>';
 }
 ```
 
