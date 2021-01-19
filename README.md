@@ -143,6 +143,27 @@ $request->setTransactionType(TransactionType::STATUS_CHECK)
     ->sign($borica);
 ```
 
+### 2.5. Create Reversal Request `(TRTYPE=24)`
+
+To reverse successful `SaleRequest` (TRTYPE=1) or completed deferred authorization (TRTYPE=24), create and configure `ReversalRequest`.
+
+`<RRN>` and `<INT_REF>` are returned in response of `SaleRequest` and are unique for every transaction. Both `<МИД>` and `<ТИД>` are obtained from Borica. For all properties check the library source code.
+
+```php
+$request = new ReversalRequest();
+$request->setTransactionType(TransactionType::REVERSAL)
+    ->setAmount(100.0)
+    ->setCurrency('BGN')
+    ->setOrder(9001)
+    ->setMerchant('<МИД>')
+    ->setTerminal('<ТИД>')
+    ->setTimestamp(time())
+    ->setNonce(strtoupper(bin2hex(openssl_random_pseudo_bytes(16))))
+    ->setRetrievalReferenceNumber('<RRN>')
+    ->setInternalReference('<INT_REF>')
+    ->sign($borica);
+```
+
 ## 3. Cryptography
 
 - Generate a private key with secure password:
