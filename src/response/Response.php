@@ -258,7 +258,7 @@ class Response {
             '-31' => 'Transaction already in progress',
             '-32' => 'Duplicate declined transaction',
             '-33' => 'Customer authentication by random amount or verify one-time code in progress',
-            '-40' => 'Client sidetransaction form in progress',
+            '-40' => 'Client side transaction form in progress',
             '00' => 'Successfully completed',
             '01' => 'Refer to card issuer',
             '04' => 'Pick Up',
