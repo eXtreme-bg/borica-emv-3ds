@@ -392,7 +392,7 @@ class Response {
      *
      * @var integer
      */
-    public $originalTranscationType;
+    public $originalTransactionType;
 
     /**
      * Описание: Текстово описание на код на завършване
@@ -512,7 +512,7 @@ class Response {
             $instance->electronicCommerceIndicator = $postData['ECI'];
             $instance->nonce = $postData['NONCE'];
             $instance->pSign = $postData['P_SIGN'];
-            $instance->originalTranscationType = $postData['TRAN_TRTYPE'];
+            $instance->originalTransactionType = $postData['TRAN_TRTYPE'];
             $instance->language = $postData['LANG'];
             // TODO: Review "MERCH_TOKEN_ID", "NEW_PARES" and "IPS_ECI" when new official documentation.
         } elseif ($instance->transactionType == TransactionType::DEFERRED_AUTHORIZATION) {
