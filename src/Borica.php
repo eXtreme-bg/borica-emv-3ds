@@ -160,8 +160,10 @@ class Borica {
             // TODO: Perform someting
         }
 
-        // Free key resource
-        openssl_free_key($privateKey);
+        // PHP 8 automatically frees the key instance and deprecates the function
+        if (PHP_VERSION_ID < 80000) {
+            openssl_free_key($privateKey);
+        }
 
         return strtoupper(bin2hex($signature));
     }
@@ -183,8 +185,10 @@ class Borica {
         // Verify signature
         $result = openssl_verify($data, hex2bin($signature), $publicKey, OPENSSL_ALGO_SHA256);
 
-        // Free key resource
-        openssl_free_key($publicKey);
+        // PHP 8 automatically frees the key instance and deprecates the function
+        if (PHP_VERSION_ID < 80000) {
+            openssl_free_key($publicKey);
+        }
 
         if ($result == 0) {
             // TODO: Log the error: openssl_error_string()
