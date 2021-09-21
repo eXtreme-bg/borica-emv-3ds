@@ -11,5 +11,8 @@
             "homepage": "https://1337.bg",
             "role": "Developer"
         }
-    ]
+    ],
+    "require": {
+        "php": "~7.1 || ^8.0"
+    }
 }

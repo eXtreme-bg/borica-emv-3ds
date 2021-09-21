@@ -518,7 +518,7 @@ class Response {
      * @param array $postData
      * @return Response|null
      */
-    public static function withPost(array $postData) : Response {
+    public static function withPost(array $postData) : ?Response {
         $instance = new self();
 
         $instance->transactionType = intval($postData['TRTYPE']);

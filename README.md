@@ -6,6 +6,7 @@ Borica EMV 3DS is PHP library providing an easier way to integrate newly release
 
 *TBD*
 
+* PHP 7.1 or newer
 * Properly configured `default_charset` php.ini directive
 
 ## 1. Installation
