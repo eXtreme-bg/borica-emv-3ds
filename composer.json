@@ -1,6 +1,11 @@
 {
     "name": "extreme-bg/borica-emv-3ds",
     "description": "Client library for Borica EMV 3DS",
+    "keywords": [
+        "borica",
+        "борика",
+        "borika"
+    ],
     "type": "library",
     "homepage": "https://1337.bg",
     "license": "MIT",
