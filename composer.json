@@ -17,6 +17,11 @@
             "role": "Developer"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "BogdanKovachev\\Borica": "src/"
+        }
+    },
     "require": {
         "php": "~7.1 || ^8.0"
     }
