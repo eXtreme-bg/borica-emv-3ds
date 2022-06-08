@@ -15,7 +15,7 @@ class StatusCheckRequest extends Request {
      * Generate extended MAC and use it to sign sended data
      *
      * @param Borica $borica
-     * @return SaleRequest
+     * @return StatusCheckRequest
      */
     public function sign(Borica $borica) : StatusCheckRequest {
         $mac = Borica::generateMacExtended($this->toPostData(), false);

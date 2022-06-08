@@ -373,7 +373,7 @@ class Request {
     }
 
     /**
-     * @param string $merchantame
+     * @param string $merchantName
      * @return Request
      */
     public function setMerchantName($merchantName) : Request {
@@ -553,7 +553,7 @@ class Request {
      * @return string
      */
     public function getOrder() : string {
-        return str_pad($this->order, 6, '0', STR_PAD_LEFT);
+        return str_pad(strval($this->order), 6, '0', STR_PAD_LEFT);
     }
 
     /**
