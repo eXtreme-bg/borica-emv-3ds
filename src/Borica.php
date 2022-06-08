@@ -33,11 +33,6 @@ class Borica {
     /**
      * @var string
      */
-    private $apiUrl;
-
-    /**
-     * @var string
-     */
     public $privateKey;
 
     /**
