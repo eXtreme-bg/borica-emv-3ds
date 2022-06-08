@@ -33,15 +33,19 @@ class ReversalRequest extends Request {
 
         // Validate all mandatory properties
         foreach ([
+            'terminal',
+            'transactionType',
             'amount',
             'currency',
-            'terminal',
-            'merchant',
-            'transactionType',
             'order',
-            'timestamp',
+            'description',
+            'merchant',
+            'merchantName',
+            'addendum',
+            'adCustBorOrderId',
             'retrievalReferenceNumber',
             'internalReference',
+            'timestamp',
             'nonce',
             'pSign'
         ] as $property) {
@@ -49,6 +53,8 @@ class ReversalRequest extends Request {
                 $this->errors[$property][] = $property . ' is required.';
             }
         }
+
+        // TODO: Validate optional properties `merchantUrl`, `email`, `country`, `merchantTimezone` and `language`
 
         // TODO: Add additional validators
 
@@ -62,26 +68,22 @@ class ReversalRequest extends Request {
      */
     public function toPostData() : array {
         $postData = [
+            'TERMINAL' => $this->terminal,
+            'TRTYPE' => $this->transactionType,
             'AMOUNT' => $this->getAmount(),
             'CURRENCY' => $this->currency,
-            'TERMINAL' => $this->terminal,
-            'MERCHANT' => $this->merchant,
-            'TRTYPE' => $this->transactionType,
             'ORDER' => $this->getOrder(),
-            'TIMESTAMP' => $this->timestamp,
+            'DESC' => $this->description,
+            'MERCHANT' => $this->merchant,
+            'MERCH_NAME' => $this->merchantName,
+            'ADDENDUM' => $this->addendum,
+            'AD.CUST_BOR_ORDER_ID' => $this->adCustBorOrderId,
             'RRN' => $this->retrievalReferenceNumber,
             'INT_REF' => $this->internalReference,
+            'TIMESTAMP' => $this->timestamp,
             'NONCE' => $this->nonce,
             'P_SIGN' => $this->pSign
         ];
-
-        if ($this->description) {
-            $postData['DESC'] = $this->description;
-        }
-
-        if ($this->merchantName) {
-            $postData['MERCH_NAME'] = $this->merchantName;
-        }
 
         if ($this->merchantUrl) {
             $postData['MERCH_URL'] = $this->merchantUrl;
@@ -103,12 +105,39 @@ class ReversalRequest extends Request {
             $postData['LANG'] = $this->language;
         }
 
-        if ($this->adCustBorOrderId) {
-            $postData['AD.CUST_BOR_ORDER_ID'] = $this->adCustBorOrderId;
-            $postData['ADDENDUM'] = $this->addendum;
-        }
-
         return $postData;
     }
 
+    /**
+     * @param Borica $borica
+     * @return array
+     */
+    public function makeApiRequest(Borica $borica): array {
+        $curl = curl_init();
+
+        $postFields = http_build_query($this->toPostData());
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $borica->getApiUrl(),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $postFields,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/x-www-form-urlencoded'
+            ]
+        ]);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        $response = json_decode($response, true);
+
+        return $response;
+    }
 }

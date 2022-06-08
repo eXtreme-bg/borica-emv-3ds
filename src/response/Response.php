@@ -553,9 +553,52 @@ class Response {
         } elseif ($instance->transactionType == TransactionType::REVERSE_DEFERRED_AUTHORIZATION) {
 
         } elseif ($instance->transactionType == TransactionType::REVERSAL) {
-
+            // TODO: Set AUTH_STEP_RES, CARDHOLDERINFO and CARD_BRAND
+            $instance->action = intval($postData['ACTION']);
+            $instance->responseCode = $postData['RC'];
+            $instance->statusMessage = $postData['STATUSMSG'];
+            $instance->terminal = $postData['TERMINAL'];
+            $instance->transactionType = $postData['TRTYPE'];
+            $instance->amount = floatval($postData['AMOUNT']);
+            $instance->currency = $postData['CURRENCY'];
+            $instance->order = $postData['ORDER'];
+            $instance->timestamp = $postData['TIMESTAMP'];
+            $instance->originalTransactionDate = $postData['TRAN_DATE'];
+            $instance->approval = $postData['APPROVAL'];
+            $instance->retrievalReferenceNumber = $postData['RRN'];
+            $instance->internalReference = $postData['INT_REF'];
+            $instance->paresStatus = $postData['PARES_STATUS'];
+            // AUTH_STEP_RES
+            // CARDHOLDERINFO
+            $instance->electronicCommerceIndicator = $postData['ECI'];
+            $instance->cardNumber = $postData['CARD'];
+            // CARD_BRAND
+            $instance->nonce = $postData['NONCE'];
+            $instance->pSign = $postData['P_SIGN'];
         } elseif ($instance->transactionType == TransactionType::STATUS_CHECK) {
-
+            // TODO: Set AUTH_STEP_RES, CARDHOLDERINFO and CARD_BRAND
+            $instance->action = intval($postData['ACTION']);
+            $instance->responseCode = $postData['RC'];
+            $instance->statusMessage = $postData['STATUSMSG'];
+            $instance->terminal = $postData['TERMINAL'];
+            $instance->transactionType = $postData['TRTYPE'];
+            $instance->amount = floatval($postData['AMOUNT']);
+            $instance->currency = $postData['CURRENCY'];
+            $instance->order = $postData['ORDER'];
+            $instance->timestamp = $postData['TIMESTAMP'];
+            $instance->originalTransactionDate = $postData['TRAN_DATE'];
+            $instance->originalTransactionType = $postData['TRAN_TRTYPE'];
+            $instance->approval = $postData['APPROVAL'];
+            $instance->retrievalReferenceNumber = $postData['RRN'];
+            $instance->internalReference = $postData['INT_REF'];
+            $instance->paresStatus = $postData['PARES_STATUS'];
+            // AUTH_STEP_RES
+            // CARDHOLDERINFO
+            $instance->electronicCommerceIndicator = $postData['ECI'];
+            $instance->cardNumber = $postData['CARD'];
+            // CARD_BRAND
+            $instance->nonce = $postData['NONCE'];
+            $instance->pSign = $postData['P_SIGN'];
         } else {
             return null;
         }
