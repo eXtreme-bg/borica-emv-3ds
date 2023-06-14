@@ -11,52 +11,6 @@ use BogdanKovachev\Borica\TransactionType;
 class Request {
 
     /**
-     * Fields used for generating message authentication code (MAC)
-     */
-    const MAC_FIELDS = [
-        TransactionType::SALE => [
-            'TERMINAL',
-            'TRTYPE',
-            'AMOUNT',
-            'CURRENCY',
-            'TIMESTAMP'
-        ],
-        TransactionType::DEFERRED_AUTHORIZATION => [
-            'TERMINAL',
-            'TRTYPE',
-            'AMOUNT',
-            'TIMESTAMP',
-            'DESC'
-        ],
-        TransactionType::COMPLETE_DEFERRED_AUTHORIZATION => [
-            'TERMINAL',
-            'TRTYPE',
-            'AMOUNT',
-            'TIMESTAMP',
-            'DESC'
-        ],
-        TransactionType::REVERSE_DEFERRED_AUTHORIZATION => [
-            'TERMINAL',
-            'TRTYPE',
-            'AMOUNT',
-            'TIMESTAMP',
-            'DESC'
-        ],
-        TransactionType::REVERSAL => [
-            'TERMINAL',
-            'TRTYPE',
-            'AMOUNT',
-            'TIMESTAMP',
-            'DESC'
-        ],
-        TransactionType::STATUS_CHECK => [
-            'TERMINAL',
-            'TRTYPE',
-            'ORDER'
-        ]
-    ];
-
-    /**
      * Fields used for generating extended message authentication code (MAC)
      */
     const MAC_EXTENDED_FIELDS = [

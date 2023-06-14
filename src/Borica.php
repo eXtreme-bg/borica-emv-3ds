@@ -93,25 +93,6 @@ class Borica {
     }
 
     /**
-     * Generate message authentication code (MAC) for signing
-     *
-     * @param array $data
-     * @param boolean $isResponse
-     * @return string
-     */
-    public static function generateMac(array $data, bool $isResponse) : string {
-        $macFields = $isResponse ? Response::MAC_FIELDS : Request::MAC_FIELDS;
-
-        $message = '';
-
-        foreach ($macFields[$data['TRTYPE']] as $field) {
-            $message .= mb_strlen($data[$field]) . $data[$field];
-        }
-
-        return $message;
-    }
-
-    /**
      * Generate extended message authentication code (MAC) for signing
      *
      * @param array $data
