@@ -580,6 +580,34 @@ class Response {
     public $language;
 
     /**
+     * Описание: Бранд на картата
+     * Размер: 1-4
+     * Съдържание: Бранд на картата
+     *
+     * @var string
+     */
+    public $cardBrand;
+
+    /**
+     * Описание: Информация за картодържателя
+     * Размер: 1-128
+     * Съдържание: Информация за картодържателя от ACS на издателя. Търговецът е длъжен да визуализира стойността на
+     * това поле пред картодържателя.
+     *
+     * @var [type]
+     */
+    public $cardHolderInfo;
+
+    /**
+     * Описание: Статус на автентикация
+     * Размер: 1-32
+     * Съдържание: Статус на автентикация, използван в схемата 3-D Secure.
+     *
+     * @var string
+     */
+    public $authenticationStepResult;
+
+    /**
      * @var array
      */
     public $postData = [];
@@ -600,27 +628,28 @@ class Response {
         $instance->postData = $postData;
 
         if ($instance->transactionType == TransactionType::SALE) {
-            $instance->terminal = $postData['TERMINAL'];
-            $instance->transactionType = $postData['TRTYPE'];
-            $instance->order = $postData['ORDER'];
-            $instance->amount = floatval($postData['AMOUNT']);
-            $instance->currency = $postData['CURRENCY'];
             $instance->action = intval($postData['ACTION']);
-            $instance->responseCode = $postData['RC'];
+            $instance->amount = floatval($postData['AMOUNT']);
             $instance->approval = $postData['APPROVAL'];
-            $instance->retrievalReferenceNumber = $postData['RRN'];
-            $instance->internalReference = $postData['INT_REF'];
-            $instance->statusMessage = $postData['STATUSMSG'];
+            $instance->authenticationStepResult = $postData['AUTH_STEP_RES'];
+            $instance->cardBrand = $postData['CARD_BRAND'];
+            $instance->cardHolderInfo = $postData['CARDHOLDERINFO'];
             $instance->cardNumber = $postData['CARD'];
-            $instance->originalTransactionDate = $postData['TRAN_DATE'];
-            $instance->timestamp = $postData['TIMESTAMP'];
-            $instance->paresStatus = $postData['PARES_STATUS'];
+            $instance->currency = $postData['CURRENCY'];
             $instance->electronicCommerceIndicator = $postData['ECI'];
-            $instance->nonce = $postData['NONCE'];
-            $instance->pSign = $postData['P_SIGN'];
-            $instance->originalTransactionType = $postData['TRAN_TRTYPE'];
+            $instance->internalReference = $postData['INT_REF'];
             $instance->language = $postData['LANG'];
-            // TODO: Review "MERCH_TOKEN_ID", "NEW_PARES" and "IPS_ECI" when new official documentation.
+            $instance->nonce = $postData['NONCE'];
+            $instance->order = $postData['ORDER'];
+            $instance->originalTransactionDate = $postData['TRAN_DATE'];
+            $instance->paresStatus = $postData['PARES_STATUS'];
+            $instance->pSign = $postData['P_SIGN'];
+            $instance->responseCode = $postData['RC'];
+            $instance->retrievalReferenceNumber = $postData['RRN'];
+            $instance->statusMessage = $postData['STATUSMSG'];
+            $instance->terminal = $postData['TERMINAL'];
+            $instance->timestamp = $postData['TIMESTAMP'];
+            $instance->transactionType = $postData['TRTYPE'];
         } elseif ($instance->transactionType == TransactionType::DEFERRED_AUTHORIZATION) {
 
         } elseif ($instance->transactionType == TransactionType::COMPLETE_DEFERRED_AUTHORIZATION) {
