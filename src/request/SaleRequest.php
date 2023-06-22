@@ -33,15 +33,19 @@ class SaleRequest extends Request {
 
         // Validate all mandatory properties
         foreach ([
+            'adCustBorOrderId',
+            'addendum',
             'amount',
             'currency',
-            'terminal',
+            'description',
             'merchant',
-            'transactionType',
-            'order',
-            'timestamp',
+            'merchantName',
             'nonce',
-            'pSign'
+            'order',
+            'pSign',
+            'terminal',
+            'timestamp',
+            'transactionType'
         ] as $property) {
             if ($this->$property === null || mb_strlen($this->$property) === 0) {
                 $this->errors[$property][] = $property . ' is required.';
@@ -60,48 +64,39 @@ class SaleRequest extends Request {
      */
     public function toPostData() : array {
         $postData = [
+            'AD.CUST_BOR_ORDER_ID' => $this->adCustBorOrderId,
+            'ADDENDUM' => $this->addendum,
             'AMOUNT' => $this->getAmount(),
             'CURRENCY' => $this->currency,
-            'TERMINAL' => $this->terminal,
+            'DESC' => $this->description,
+            'MERCH_NAME' => $this->merchantName,
             'MERCHANT' => $this->merchant,
-            'TRTYPE' => $this->transactionType,
-            'ORDER' => $this->getOrder(),
-            'TIMESTAMP' => $this->timestamp,
             'NONCE' => $this->nonce,
-            'P_SIGN' => $this->pSign
+            'ORDER' => $this->getOrder(),
+            'P_SIGN' => $this->pSign,
+            'TERMINAL' => $this->terminal,
+            'TIMESTAMP' => $this->timestamp,
+            'TRTYPE' => $this->transactionType
         ];
 
-        if ($this->description) {
-            $postData['DESC'] = $this->description;
-        }
-
-        if ($this->merchantName) {
-            $postData['MERCH_NAME'] = $this->merchantName;
-        }
-
-        if ($this->merchantUrl) {
-            $postData['MERCH_URL'] = $this->merchantUrl;
+        if ($this->country) {
+            $postData['COUNTRY'] = $this->country;
         }
 
         if ($this->email) {
             $postData['EMAIL'] = $this->email;
         }
 
-        if ($this->country) {
-            $postData['COUNTRY'] = $this->country;
+        if ($this->language) {
+            $postData['LANG'] = $this->language;
         }
 
         if ($this->merchantTimezone) {
             $postData['MERCH_GMT'] = $this->merchantTimezone;
         }
 
-        if ($this->language) {
-            $postData['LANG'] = $this->language;
-        }
-
-        if ($this->adCustBorOrderId) {
-            $postData['AD.CUST_BOR_ORDER_ID'] = $this->adCustBorOrderId;
-            $postData['ADDENDUM'] = $this->addendum;
+        if ($this->merchantUrl) {
+            $postData['MERCH_URL'] = $this->merchantUrl;
         }
 
         return $postData;
