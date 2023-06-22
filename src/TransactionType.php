@@ -36,5 +36,4 @@ class TransactionType {
      * Проверка за статус на трансакция
      */
     const STATUS_CHECK = 90;
-
 }

@@ -621,7 +621,7 @@ class Response {
      * @param array $postData
      * @return Response|null
      */
-    public static function withPost(array $postData) : ?Response {
+    public static function withPost(array $postData): ?Response {
         $instance = new self();
 
         $instance->transactionType = intval($postData['TRTYPE']);
@@ -715,7 +715,7 @@ class Response {
      *
      * @return boolean
      */
-    public function isSuccessful() : bool {
+    public function isSuccessful(): bool {
         return $this->responseCode == '00';
     }
 
@@ -723,7 +723,7 @@ class Response {
      * @param Borica $borica
      * @return Response
      */
-    public function verify(Borica $borica) : Response {
+    public function verify(Borica $borica): Response {
         $mac = Borica::generateMac($this->postData, true);
 
         $this->signatureIsVerified = $borica->verifySignature($mac, $this->pSign);
@@ -737,12 +737,11 @@ class Response {
      * @param string $lang Language ("bg" or "en")
      * @return string
      */
-    public function responseCodeDescription($lang = 'bg') : string {
+    public function responseCodeDescription($lang = 'bg'): string {
         if (isset($this->responseCode) && array_key_exists($this->responseCode, $this::RESPONSE_CODES[$lang])) {
             return $this::RESPONSE_CODES[$lang][$this->responseCode];
         }
 
         return '';
     }
-
 }

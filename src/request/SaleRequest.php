@@ -17,7 +17,7 @@ class SaleRequest extends Request {
      * @param Borica $borica
      * @return SaleRequest
      */
-    public function sign(Borica $borica) : SaleRequest {
+    public function sign(Borica $borica): SaleRequest {
         $mac = Borica::generateMac($this->toPostData(), false);
 
         $this->setPSign($borica->signWithPrivateKey($mac));
@@ -28,7 +28,7 @@ class SaleRequest extends Request {
     /**
      * @return boolean
      */
-    public function validate() : bool {
+    public function validate(): bool {
         $this->clearErrors();
 
         // Validate all mandatory properties
@@ -62,7 +62,7 @@ class SaleRequest extends Request {
      *
      * @return array
      */
-    public function toPostData() : array {
+    public function toPostData(): array {
         $postData = [
             'AD.CUST_BOR_ORDER_ID' => $this->adCustBorOrderId,
             'ADDENDUM' => $this->addendum,
@@ -101,5 +101,4 @@ class SaleRequest extends Request {
 
         return $postData;
     }
-
 }

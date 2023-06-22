@@ -17,7 +17,7 @@ class StatusCheckRequest extends Request {
      * @param Borica $borica
      * @return StatusCheckRequest
      */
-    public function sign(Borica $borica) : StatusCheckRequest {
+    public function sign(Borica $borica): StatusCheckRequest {
         $mac = Borica::generateMac($this->toPostData(), false);
 
         $this->setPSign($borica->signWithPrivateKey($mac));
@@ -28,7 +28,7 @@ class StatusCheckRequest extends Request {
     /**
      * @return boolean
      */
-    public function validate() : bool {
+    public function validate(): bool {
         $this->clearErrors();
 
         // Validate all mandatory properties
@@ -56,7 +56,7 @@ class StatusCheckRequest extends Request {
      *
      * @return array
      */
-    public function toPostData() : array {
+    public function toPostData(): array {
         $postData = [
             'TERMINAL' => $this->terminal,
             'TRTYPE' => $this->transactionType,

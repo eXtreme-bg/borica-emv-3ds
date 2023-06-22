@@ -49,7 +49,7 @@ class Borica {
      * @param boolean $sandbox Sandbox mode
      * @return Borica
      */
-    public function setSandboxMode(bool $sandbox) : Borica {
+    public function setSandboxMode(bool $sandbox): Borica {
         $this->sandboxMode = $sandbox;
 
         return $this;
@@ -58,7 +58,7 @@ class Borica {
     /**
      * @return string
      */
-    public function getApiUrl() : string {
+    public function getApiUrl(): string {
         return $this->sandboxMode ? self::API_URL_DEVELOPMENT : self::API_URL_PRODUCTION;
     }
 
@@ -66,7 +66,7 @@ class Borica {
      * @param string $filePath Absolute file path to private key (e.g. /home/username/public_html/certificates/borica.pem)
      * @return Borica
      */
-    public function setPrivateKey(string $filePath) : Borica {
+    public function setPrivateKey(string $filePath): Borica {
         $this->privateKey = 'file://' . $filePath;
 
         return $this;
@@ -76,7 +76,7 @@ class Borica {
      * @param string $password Private key password
      * @return Borica
      */
-    public function setPrivateKeyPassword(string $password) : Borica {
+    public function setPrivateKeyPassword(string $password): Borica {
         $this->privateKeyPassword = $password;
 
         return $this;
@@ -86,7 +86,7 @@ class Borica {
      * @param string $filePath Absolute file path to certificate (e.g. /home/username/public_html/certificates/borica.cer)
      * @return Borica
      */
-    public function setCertificate(string $filePath) : Borica {
+    public function setCertificate(string $filePath): Borica {
         $this->certificate = 'file://' . $filePath;
 
         return $this;
@@ -99,7 +99,7 @@ class Borica {
      * @param boolean $isResponse
      * @return string
      */
-    public static function generateMac(array $data, bool $isResponse) : string {
+    public static function generateMac(array $data, bool $isResponse): string {
         return Borica::generateMacExtended($data, $isResponse);
     }
 
@@ -110,7 +110,7 @@ class Borica {
      * @param boolean $isResponse
      * @return string
      */
-    public static function generateMacGeneral(array $data, bool $isResponse) : string {
+    public static function generateMacGeneral(array $data, bool $isResponse): string {
         $macFields = $isResponse ? Response::MAC_GENERAL_FIELDS : Request::MAC_GENERAL_FIELDS;
 
         $message = '';
@@ -138,7 +138,7 @@ class Borica {
      * @param boolean $isResponse
      * @return string
      */
-    public static function generateMacExtended(array $data, bool $isResponse) : string {
+    public static function generateMacExtended(array $data, bool $isResponse): string {
         $macFields = $isResponse ? Response::MAC_EXTENDED_FIELDS : Request::MAC_EXTENDED_FIELDS;
 
         $message = '';
@@ -163,7 +163,7 @@ class Borica {
      * @param string $data
      * @return string
      */
-    function signWithPrivateKey(string $data) : string {
+    function signWithPrivateKey(string $data): string {
         // Get a private key
         $privateKey = openssl_pkey_get_private($this->privateKey, $this->privateKeyPassword);
         if (!$privateKey) {
@@ -190,7 +190,7 @@ class Borica {
      * @param string $signature
      * @return boolean
      */
-    public function verifySignature(string $data, string $signature) : bool {
+    public function verifySignature(string $data, string $signature): bool {
         // Get a public key
         $publicKey = openssl_pkey_get_public($this->certificate);
         if (!$publicKey) {
@@ -213,5 +213,4 @@ class Borica {
 
         return true;
     }
-
 }

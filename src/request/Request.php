@@ -365,7 +365,7 @@ class Request {
      * @param integer $transactionType
      * @return Request
      */
-    public function setTransactionType(int $transactionType) : Request {
+    public function setTransactionType(int $transactionType): Request {
         $this->transactionType = $transactionType;
 
         return $this;
@@ -375,7 +375,7 @@ class Request {
      * @param float $amount
      * @return Request
      */
-    public function setAmount(float $amount) : Request {
+    public function setAmount(float $amount): Request {
         $this->amount = $amount;
 
         return $this;
@@ -385,7 +385,7 @@ class Request {
      * @param string $currency
      * @return Request
      */
-    public function setCurrency(string $currency) : Request {
+    public function setCurrency(string $currency): Request {
         $this->currency = $currency;
 
         return $this;
@@ -395,7 +395,7 @@ class Request {
      * @param integer $order
      * @return Request
      */
-    public function setOrder(int $order) : Request {
+    public function setOrder(int $order): Request {
         $this->order = $order;
 
         return $this;
@@ -405,7 +405,7 @@ class Request {
      * @param string $description
      * @return Request
      */
-    public function setDescription(string $description) : Request {
+    public function setDescription(string $description): Request {
         $this->description = $description;
 
         return $this;
@@ -415,7 +415,7 @@ class Request {
      * @param string $merchantName
      * @return Request
      */
-    public function setMerchantName($merchantName) : Request {
+    public function setMerchantName($merchantName): Request {
         $this->merchantName = $merchantName;
 
         return $this;
@@ -425,7 +425,7 @@ class Request {
      * @param string $merchantUrl
      * @return Request
      */
-    public function setMerchantUrl(string $merchantUrl) : Request {
+    public function setMerchantUrl(string $merchantUrl): Request {
         $this->merchantUrl = $merchantUrl;
 
         return $this;
@@ -435,7 +435,7 @@ class Request {
      * @param string $merchant
      * @return Request
      */
-    public function setMerchant(string $merchant) : Request {
+    public function setMerchant(string $merchant): Request {
         $this->merchant = $merchant;
 
         return $this;
@@ -445,7 +445,7 @@ class Request {
      * @param string $terminal
      * @return Request
      */
-    public function setTerminal(string $terminal) : Request {
+    public function setTerminal(string $terminal): Request {
         $this->terminal = $terminal;
 
         return $this;
@@ -455,7 +455,7 @@ class Request {
      * @param string $email
      * @return Request
      */
-    public function setEmail(string $email) : Request {
+    public function setEmail(string $email): Request {
         $this->email = $email;
 
         return $this;
@@ -465,7 +465,7 @@ class Request {
      * @param string $country
      * @return Request
      */
-    public function setCountry(string $country) : Request {
+    public function setCountry(string $country): Request {
         $this->country = $country;
 
         return $this;
@@ -475,7 +475,7 @@ class Request {
      * @param string $merchantTimezone
      * @return Request
      */
-    public function setMerchantTimezone(string $merchantTimezone) : Request {
+    public function setMerchantTimezone(string $merchantTimezone): Request {
         $this->merchantTimezone = $merchantTimezone;
 
         return $this;
@@ -485,7 +485,7 @@ class Request {
      * @param integer $timestamp
      * @return Request
      */
-    public function setTimestamp(int $timestamp) : Request {
+    public function setTimestamp(int $timestamp): Request {
         $this->timestamp = gmdate('YmdHis', $timestamp);
 
         return $this;
@@ -495,7 +495,7 @@ class Request {
      * @param string $nonce
      * @return Request
      */
-    public function setNonce(string $nonce) : Request {
+    public function setNonce(string $nonce): Request {
         $this->nonce = $nonce;
 
         return $this;
@@ -505,7 +505,7 @@ class Request {
      * @param string $pSign
      * @return Request
      */
-    public function setPSign(string $pSign) : Request {
+    public function setPSign(string $pSign): Request {
         $this->pSign = $pSign;
 
         return $this;
@@ -515,7 +515,7 @@ class Request {
      * @param string $retrievalReferenceNumber
      * @return Request
      */
-    public function setRetrievalReferenceNumber(string $retrievalReferenceNumber) : Request {
+    public function setRetrievalReferenceNumber(string $retrievalReferenceNumber): Request {
         $this->retrievalReferenceNumber = $retrievalReferenceNumber;
 
         return $this;
@@ -525,7 +525,7 @@ class Request {
      * @param string $internalReference
      * @return Request
      */
-    public function setInternalReference(string $internalReference) : Request {
+    public function setInternalReference(string $internalReference): Request {
         $this->internalReference = $internalReference;
 
         return $this;
@@ -535,7 +535,7 @@ class Request {
      * @param string $mInfo
      * @return Request
      */
-    public function setMInfo(string $mInfo) : Request {
+    public function setMInfo(string $mInfo): Request {
         $this->mInfo = $mInfo;
 
         return $this;
@@ -545,7 +545,7 @@ class Request {
      * @param string $orderIdentifier
      * @return Request
      */
-    public function setOrderIdentifier(string $orderIdentifier) : Request {
+    public function setOrderIdentifier(string $orderIdentifier): Request {
         $this->adCustBorOrderId = str_replace(';', '-', $orderIdentifier);
 
         return $this;
@@ -555,7 +555,7 @@ class Request {
      * @param string $addendum
      * @return Request
      */
-    public function setAddendum(string $addendum) : Request {
+    public function setAddendum(string $addendum): Request {
         $this->addendum = $addendum;
 
         return $this;
@@ -565,7 +565,7 @@ class Request {
      * @param string $originalTransactionType
      * @return Request
      */
-    public function setOriginalTransactionType(string $originalTransactionType) : Request {
+    public function setOriginalTransactionType(string $originalTransactionType): Request {
         $this->originalTransactionType = $originalTransactionType;
 
         return $this;
@@ -575,7 +575,7 @@ class Request {
      * @param string $language
      * @return Request
      */
-    public function setLanguage(string $language) : Request {
+    public function setLanguage(string $language): Request {
         $this->language = $language;
 
         return $this;
@@ -584,14 +584,14 @@ class Request {
     /**
      * @return string
      */
-    public function getAmount() : string {
+    public function getAmount(): string {
         return number_format($this->amount, 2, '.', '');
     }
 
     /**
      * @return string
      */
-    public function getOrder() : string {
+    public function getOrder(): string {
         return str_pad(strval($this->order), 6, '0', STR_PAD_LEFT);
     }
 
@@ -600,7 +600,7 @@ class Request {
      *
      * @return string
      */
-    public function renderForm($borica) : string {
+    public function renderForm($borica): string {
         $html = '<form action="' . $borica->getApiUrl() . '" method="POST" id="boricaForm">';
 
         foreach ($this->toPostData() as $key => $value) {
@@ -618,29 +618,28 @@ class Request {
      * @param string $text
      * @return string
      */
-    private static function encode(string $text) : string {
+    private static function encode(string $text): string {
         return htmlspecialchars($text, ENT_QUOTES);
     }
 
     /**
      * @return boolean
      */
-    public function hasErrors() : bool {
+    public function hasErrors(): bool {
         return $this->errors !== [];
     }
 
     /**
      * @return array
      */
-    public function getErrors() : array {
+    public function getErrors(): array {
         return $this->errors;
     }
 
     /**
      * @return void
      */
-    public function clearErrors() : void {
+    public function clearErrors(): void {
         $this->errors = [];
     }
-
 }

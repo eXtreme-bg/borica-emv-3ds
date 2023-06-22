@@ -17,7 +17,7 @@ class ReversalRequest extends Request {
      * @param Borica $borica
      * @return ReversalRequest
      */
-    public function sign(Borica $borica) : ReversalRequest {
+    public function sign(Borica $borica): ReversalRequest {
         $mac = Borica::generateMac($this->toPostData(), false);
 
         $this->setPSign($borica->signWithPrivateKey($mac));
@@ -28,7 +28,7 @@ class ReversalRequest extends Request {
     /**
      * @return boolean
      */
-    public function validate() : bool {
+    public function validate(): bool {
         $this->clearErrors();
 
         // Validate all mandatory properties
@@ -66,7 +66,7 @@ class ReversalRequest extends Request {
      *
      * @return array
      */
-    public function toPostData() : array {
+    public function toPostData(): array {
         $postData = [
             'TERMINAL' => $this->terminal,
             'TRTYPE' => $this->transactionType,
