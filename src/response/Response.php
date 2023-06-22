@@ -11,6 +11,114 @@ use BogdanKovachev\Borica\TransactionType;
 class Response {
 
     /**
+     * Fields used for generating general message authentication code (MAC)
+     */
+    const MAC_GENERAL_FIELDS = [
+        TransactionType::SALE => [
+            'ACTION',
+            'RC',
+            'APPROVAL',
+            'TERMINAL',
+            'TRTYPE',
+            'AMOUNT',
+            'CURRENCY',
+            'ORDER',
+            'RRN',
+            'INT_REF',
+            'PARES_STATUS',
+            'ECI',
+            'TIMESTAMP',
+            'NONCE',
+            'RFU'
+        ],
+        TransactionType::DEFERRED_AUTHORIZATION => [
+            'ACTION',
+            'RC',
+            'APPROVAL',
+            'TERMINAL',
+            'TRTYPE',
+            'AMOUNT',
+            'CURRENCY',
+            'ORDER',
+            'RRN',
+            'INT_REF',
+            'PARES_STATUS',
+            'ECI',
+            'TIMESTAMP',
+            'NONCE',
+            'RFU'
+        ],
+        TransactionType::COMPLETE_DEFERRED_AUTHORIZATION => [
+            'ACTION',
+            'RC',
+            'APPROVAL',
+            'TERMINAL',
+            'TRTYPE',
+            'AMOUNT',
+            'CURRENCY',
+            'ORDER',
+            'RRN',
+            'INT_REF',
+            'PARES_STATUS',
+            'ECI',
+            'TIMESTAMP',
+            'NONCE',
+            'RFU'
+        ],
+        TransactionType::REVERSE_DEFERRED_AUTHORIZATION => [
+            'ACTION',
+            'RC',
+            'APPROVAL',
+            'TERMINAL',
+            'TRTYPE',
+            'AMOUNT',
+            'CURRENCY',
+            'ORDER',
+            'RRN',
+            'INT_REF',
+            'PARES_STATUS',
+            'ECI',
+            'TIMESTAMP',
+            'NONCE',
+            'RFU'
+        ],
+        TransactionType::REVERSAL => [
+            'ACTION',
+            'RC',
+            'APPROVAL',
+            'TERMINAL',
+            'TRTYPE',
+            'AMOUNT',
+            'CURRENCY',
+            'ORDER',
+            'RRN',
+            'INT_REF',
+            'PARES_STATUS',
+            'ECI',
+            'TIMESTAMP',
+            'NONCE',
+            'RFU'
+        ],
+        TransactionType::STATUS_CHECK => [
+            'ACTION',
+            'RC',
+            'APPROVAL',
+            'TERMINAL',
+            'TRTYPE',
+            'AMOUNT',
+            'CURRENCY',
+            'ORDER',
+            'RRN',
+            'INT_REF',
+            'PARES_STATUS',
+            'ECI',
+            'TIMESTAMP',
+            'NONCE',
+            'RFU'
+        ]
+    ];
+
+    /**
      * Fields used for generating extended message authentication code (MAC)
      *
      * @deprecated Redundant after 31 Jul 2023

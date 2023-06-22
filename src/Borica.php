@@ -93,6 +93,32 @@ class Borica {
     }
 
     /**
+     * Generate general message authentication code (MAC) for signing
+     *
+     * @param array $data
+     * @param boolean $isResponse
+     * @return string
+     */
+    public static function generateMacGeneral(array $data, bool $isResponse) : string {
+        $macFields = $isResponse ? Response::MAC_GENERAL_FIELDS : Request::MAC_GENERAL_FIELDS;
+
+        $message = '';
+
+        foreach ($macFields[$data['TRTYPE']] as $field) {
+            $value = $data[$field];
+
+            // When field is missing, use symbol `-`
+            if (mb_strlen($value) == 0) {
+                $message .= '-';
+            } else {
+                $message .= mb_strlen($value) . $value;
+            }
+        }
+
+        return $message;
+    }
+
+    /**
      * Generate extended message authentication code (MAC) for signing
      *
      * @deprecated Redundant after 31 Jul 2023
