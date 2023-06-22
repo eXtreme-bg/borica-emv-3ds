@@ -18,7 +18,7 @@ class SaleRequest extends Request {
      * @return SaleRequest
      */
     public function sign(Borica $borica) : SaleRequest {
-        $mac = Borica::generateMacExtended($this->toPostData(), false);
+        $mac = Borica::generateMac($this->toPostData(), false);
 
         $this->setPSign($borica->signWithPrivateKey($mac));
 

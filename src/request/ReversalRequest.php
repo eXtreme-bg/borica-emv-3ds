@@ -18,7 +18,7 @@ class ReversalRequest extends Request {
      * @return ReversalRequest
      */
     public function sign(Borica $borica) : ReversalRequest {
-        $mac = Borica::generateMacExtended($this->toPostData(), false);
+        $mac = Borica::generateMac($this->toPostData(), false);
 
         $this->setPSign($borica->signWithPrivateKey($mac));
 
