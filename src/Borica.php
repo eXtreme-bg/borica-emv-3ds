@@ -95,6 +95,8 @@ class Borica {
     /**
      * Generate extended message authentication code (MAC) for signing
      *
+     * @deprecated Redundant after 31 Jul 2023
+     *
      * @param array $data
      * @param boolean $isResponse
      * @return string

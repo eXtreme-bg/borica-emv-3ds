@@ -12,6 +12,8 @@ class Response {
 
     /**
      * Fields used for generating extended message authentication code (MAC)
+     *
+     * @deprecated Redundant after 31 Jul 2023
      */
     const MAC_EXTENDED_FIELDS = [
         TransactionType::SALE => [
