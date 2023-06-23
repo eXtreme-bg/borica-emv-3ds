@@ -2,6 +2,8 @@
 
 Borica EMV 3DS is PHP library providing an easier way to integrate newly released Borica protocol called EMV 3DS.
 
+**The library supports the new MAC_GENERAL signage algorithm and will work after the 1 August 2023 changes.**
+
 ## 0. Requirements
 
 *TBD*
@@ -36,7 +38,8 @@ $borica = new Borica();
 $borica->setPrivateKey('/var/www/certificates/borica.pem') // Absolute file path
     ->setPrivateKeyPassword('<Private Key Password>')
     ->setCertificate('/var/www/certificates/borica.cer') // Absolute file path
-    ->setSandboxMode(true);
+    ->setSandboxMode(true)
+    ->setSigningAlgorithm(SigningAlgorithm::MAC_GENERAL);
 ```
 
 ### 2.2. Create and send Sale Request `(TRTYPE=1)`
@@ -48,23 +51,30 @@ To make a sale request (most commonly used one in e-commerce), create and config
 **Don't forget to use sanitized data instead of raw $_POST data.**
 
 ```php
+require_once __DIR__ . '/vendor/autoload.php';
+
+use BogdanKovachev\Borica\Borica;
+use BogdanKovachev\Borica\SigningAlgorithm;
+use BogdanKovachev\Borica\TransactionType;
+use BogdanKovachev\Borica\Request\SaleRequest;
+
 $request = new SaleRequest();
 $request->setTransactionType(TransactionType::SALE)
-    ->setAmount(100.0)
-    ->setCurrency('BGN')
-    ->setOrder(9001)
-    ->setDescription('Order via 1337.bg')
-    ->setMerchantName('1337.bg')
-    ->setMerchantUrl('https://1337.bg')
-    ->setMerchant('<МИД>')
-    ->setTerminal('<ТИД>')
-    ->setEmail('extreme@1337.bg')
-    ->setCountry('bg')
-    ->setMerchantTimezone('+02')
-    ->setTimestamp(time())
-    ->setNonce(strtoupper(bin2hex(openssl_random_pseudo_bytes(16))))
-    ->setOrderIdentifier($request->getOrder() . ' Website')
     ->setAddendum('AD,TD')
+    ->setAmount(100.0)
+    ->setCountry('bg')
+    ->setCurrency('BGN')
+    ->setDescription('Order via 1337.bg')
+    ->setEmail('extreme@1337.bg')
+    ->setMerchant('<МИД>')
+    ->setMerchantName('1337.bg')
+    ->setMerchantTimezone('+02')
+    ->setMerchantUrl('https://1337.bg')
+    ->setNonce(strtoupper(bin2hex(openssl_random_pseudo_bytes(16))))
+    ->setOrder(9001)
+    ->setOrderIdentifier($request->getOrder() . ' Website')
+    ->setTerminal('<ТИД>')
+    ->setTimestamp(time())
     ->sign($borica);
 ```
 
@@ -108,11 +118,19 @@ After you create the request, you need to generate an HTML form and redirect use
 After a user pays on the Borica payment page, they will be redirected to the `backUrl` defined for the terminal in APGW database (**check with the bank that this URL is correctly set for the terminal**). Note that this is not guaranteed, because the user can close their browser or disable JavaScript used for redirecting. In this case see `2.4. Create Status Check Request`.
 
 ```php
+require_once __DIR__ . '/vendor/autoload.php';
+
+use BogdanKovachev\Borica\Borica;
+use BogdanKovachev\Borica\SigningAlgorithm;
+use BogdanKovachev\Borica\TransactionType;
+use BogdanKovachev\Borica\Response\Response;
+
 $borica = new Borica();
 $borica->setPrivateKey('/var/www/certificates/borica.pem') // Absolute file path
     ->setPrivateKeyPassword('<Private Key Password>')
     ->setCertificate('/var/www/certificates/borica.cer') // Absolute file path
-    ->setSandboxMode(true);
+    ->setSandboxMode(true)
+    ->setSigningAlgorithm(SigningAlgorithm::MAC_GENERAL);
 
 $response = Response::withPost($_POST)->verify($borica);
 
@@ -135,12 +153,20 @@ if ($response->isSuccessful()) {
 If you want to check the status of an already sent request, create and configure `StatusCheckRequest`. `<ТИД>` is obtained from Borica.
 
 ```php
+require_once __DIR__ . '/vendor/autoload.php';
+
+use BogdanKovachev\Borica\Borica;
+use BogdanKovachev\Borica\Request\StatusCheckRequest;
+use BogdanKovachev\Borica\Response\Response;
+use BogdanKovachev\Borica\SigningAlgorithm;
+use BogdanKovachev\Borica\TransactionType;
+
 $request = new StatusCheckRequest();
 $request->setTransactionType(TransactionType::STATUS_CHECK)
-    ->setTerminal('<ТИД>')
-    ->setOrder(9001)
     ->setNonce(strtoupper(bin2hex(openssl_random_pseudo_bytes(16))))
+    ->setOrder(9001)
     ->setOriginalTransactionType(TransactionType::SALE)
+    ->setTerminal('<ТИД>')
     ->sign($borica);
 ```
 
@@ -151,17 +177,29 @@ To reverse successful `SaleRequest` (TRTYPE=1) or completed deferred authorizati
 `<RRN>` and `<INT_REF>` are returned in response of `SaleRequest` and are unique for every transaction. Both `<МИД>` and `<ТИД>` are obtained from Borica. For all properties check the library source code.
 
 ```php
+require_once __DIR__ . '/vendor/autoload.php';
+
+use BogdanKovachev\Borica\Borica;
+use BogdanKovachev\Borica\Request\ReversalRequest;
+use BogdanKovachev\Borica\Response\Response;
+use BogdanKovachev\Borica\SigningAlgorithm;
+use BogdanKovachev\Borica\TransactionType;
+
 $request = new ReversalRequest();
 $request->setTransactionType(TransactionType::REVERSAL)
+    ->setAddendum('AD,TD')
     ->setAmount(100.0)
     ->setCurrency('BGN')
-    ->setOrder(9001)
+    ->setDescription('Отмяна на плащане през bulmint.com')
+    ->setInternalReference('<INT_REF>')
     ->setMerchant('<МИД>')
+    ->setMerchantName('Мебели Дизма')
+    ->setNonce(strtoupper(bin2hex(openssl_random_pseudo_bytes(16))))
+    ->setOrder(9001)
+    ->setOrderIdentifier($request->getOrder() . ' Website')
+    ->setRetrievalReferenceNumber('<RRN>')
     ->setTerminal('<ТИД>')
     ->setTimestamp(time())
-    ->setNonce(strtoupper(bin2hex(openssl_random_pseudo_bytes(16))))
-    ->setRetrievalReferenceNumber('<RRN>')
-    ->setInternalReference('<INT_REF>')
     ->sign($borica);
 ```
 
