@@ -733,7 +733,7 @@ class Response {
      * @return string
      */
     public function responseCodeDescription($lang = 'bg'): string {
-        if (isset($this->responseCode) && array_key_exists($this->responseCode, $this::RESPONSE_CODES[$lang])) {
+        if (array_key_exists($this->responseCode, $this::RESPONSE_CODES[$lang])) {
             return $this::RESPONSE_CODES[$lang][$this->responseCode];
         }
 
