@@ -719,7 +719,7 @@ class Response {
      * @return Response
      */
     public function verify(Borica $borica): Response {
-        $mac = Borica::generateMac($this->postData, true);
+        $mac = Borica::generateMac($this->postData, true, $borica->signingAlgorithm);
 
         $this->signatureIsVerified = $borica->verifySignature($mac, $this->pSign);
 

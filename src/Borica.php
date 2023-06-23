@@ -2,10 +2,12 @@
 
 namespace BogdanKovachev\Borica;
 
+use BogdanKovachev\Borica\SigningAlgorithm;
 use BogdanKovachev\Borica\TransactionType;
 use BogdanKovachev\Borica\Request\Request;
 use BogdanKovachev\Borica\Response\Response;
 
+require_once 'SigningAlgorithm.php';
 require_once 'TransactionType.php';
 require_once 'request/Request.php';
 require_once 'response/Response.php';
@@ -44,6 +46,11 @@ class Borica {
      * @var string
      */
     public $certificate;
+
+    /**
+     * @var integer
+     */
+    public $signingAlgorithm = SigningAlgorithm::MAC_EXTENDED;
 
     /**
      * @param boolean $sandbox Sandbox mode
@@ -93,14 +100,32 @@ class Borica {
     }
 
     /**
+     * @param integer $signingAlgorithm Signing algorithm
+     * @return Borica
+     */
+    public function setSigningAlgorithm(int $signingAlgorithm): Borica {
+        $this->signingAlgorithm = $signingAlgorithm;
+
+        return $this;
+    }
+
+    /**
      * Generate message authentication code (MAC) for signing
      *
      * @param array $data
      * @param boolean $isResponse
+     * @param integer $signingAlgorithm
      * @return string
      */
-    public static function generateMac(array $data, bool $isResponse): string {
-        return Borica::generateMacExtended($data, $isResponse);
+    public static function generateMac(array $data, bool $isResponse, int $signingAlgorithm): string {
+        if ($signingAlgorithm == SigningAlgorithm::MAC_GENERAL) {
+            return Borica::generateMacGeneral($data, $isResponse);
+        } else if ($signingAlgorithm == SigningAlgorithm::MAC_EXTENDED) {
+            return Borica::generateMacExtended($data, $isResponse);
+        }
+
+        // TODO: Throw Exception
+        return '';
     }
 
     /**

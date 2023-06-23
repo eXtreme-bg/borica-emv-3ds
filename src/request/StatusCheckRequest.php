@@ -18,7 +18,7 @@ class StatusCheckRequest extends Request {
      * @return StatusCheckRequest
      */
     public function sign(Borica $borica): StatusCheckRequest {
-        $mac = Borica::generateMac($this->toPostData(), false);
+        $mac = Borica::generateMac($this->toPostData(), false, $borica->signingAlgorithm);
 
         $this->setPSign($borica->signWithPrivateKey($mac));
 
