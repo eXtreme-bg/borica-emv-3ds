@@ -2,15 +2,10 @@
 
 namespace BogdanKovachev\Borica;
 
-use BogdanKovachev\Borica\SigningAlgorithm;
-use BogdanKovachev\Borica\TransactionType;
 use BogdanKovachev\Borica\Request\Request;
 use BogdanKovachev\Borica\Response\Response;
-
-require_once 'SigningAlgorithm.php';
-require_once 'TransactionType.php';
-require_once 'request/Request.php';
-require_once 'response/Response.php';
+use BogdanKovachev\Borica\SigningAlgorithm;
+use BogdanKovachev\Borica\TransactionType;
 
 /**
  * @author Bogdan Kovachev (https://1337.bg)

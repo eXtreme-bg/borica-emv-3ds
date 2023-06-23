@@ -4,8 +4,6 @@ namespace BogdanKovachev\Borica\Request;
 
 use BogdanKovachev\Borica\Borica;
 
-require_once "Request.php";
-
 /**
  * @author Bogdan Kovachev (https://1337.bg)
  */
