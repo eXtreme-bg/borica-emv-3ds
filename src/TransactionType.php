@@ -33,7 +33,7 @@ class TransactionType {
     const REVERSAL = 24;
 
     /**
-     * Проверка за статус на трансакция
+     * Проверка за статус на транзакция
      */
     const STATUS_CHECK = 90;
 }
