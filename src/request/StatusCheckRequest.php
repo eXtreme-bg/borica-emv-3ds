@@ -33,13 +33,12 @@ class StatusCheckRequest extends Request {
 
         // Validate all mandatory properties
         foreach ([
-            'terminal',
-            'transactionType',
+            'nonce',
             'order',
             'originalTransactionType',
-            'timestamp',
-            'nonce',
-            'pSign'
+            'pSign',
+            'terminal',
+            'transactionType'
         ] as $property) {
             if ($this->$property === null || mb_strlen($this->$property) === 0) {
                 $this->errors[$property][] = $property . ' is required.';
@@ -58,13 +57,12 @@ class StatusCheckRequest extends Request {
      */
     public function toPostData(): array {
         $postData = [
-            'TERMINAL' => $this->terminal,
-            'TRTYPE' => $this->transactionType,
-            'ORDER' => $this->getOrder(),
-            'TRAN_TRTYPE' => $this->originalTransactionType,
-            'TIMESTAMP' => $this->timestamp,
             'NONCE' => $this->nonce,
-            'P_SIGN' => $this->pSign
+            'ORDER' => $this->getOrder(),
+            'P_SIGN' => $this->pSign,
+            'TERMINAL' => $this->terminal,
+            'TRAN_TRTYPE' => $this->originalTransactionType,
+            'TRTYPE' => $this->transactionType
         ];
 
         return $postData;
