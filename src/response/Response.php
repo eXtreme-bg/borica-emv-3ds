@@ -649,7 +649,6 @@ class Response {
             $instance->statusMessage = $postData['STATUSMSG'];
             $instance->terminal = $postData['TERMINAL'];
             $instance->timestamp = $postData['TIMESTAMP'];
-            $instance->transactionType = $postData['TRTYPE'];
         } elseif ($instance->transactionType == TransactionType::DEFERRED_AUTHORIZATION) {
 
         } elseif ($instance->transactionType == TransactionType::COMPLETE_DEFERRED_AUTHORIZATION) {
